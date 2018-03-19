@@ -1,0 +1,42 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<div class="bg">
+<div class="content">
+<div class="topnav" id="myTopnav">
+  <a href="http://wakeit.nl:3000/contacts/" class="active">Home</a>
+  <a href="http://wakeit.nl:3000/groups/">Groepen</a>
+    <a href="http://wakeit.nl:3000/contacts.xml">Telefoonboek</a>
+  <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+</div>
+<script>
+function myFunction() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+        x.className += " responsive";
+    } else {
+        x.className = "topnav";
+    }
+}
+</script>
+<h1>Overzicht contacten</h1>
+    <% if flash[:notice] -%>
+  <p class="notice"><%= flash[:notice] %></p>
+<% end -%>
+<% @tests.each do |test|%>
+<p>
+<%= test.first_name%>
+<%= test.middle_name%>
+<%= test.last_name%>
+<%= test.phone_number%>
+<%= test.street_name%>
+<%= test.street_number%>
+<%= test.street_add%>
+<%= test.zipcode%>
+<%= test.city%>
+<%= test.country%>
+<%= test.group%>
+<% end%>
+</p>
+<div class="actions">
+			<%= button_to 'Contact toevoegen', "/test/new", :method => "put" %>
+		</div>
+		

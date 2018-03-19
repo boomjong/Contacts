@@ -1,0 +1,48 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<div class="bg">
+<div class="content">
+<div class="topnav" id="myTopnav">
+  <a href="http://wakeit.nl:3000/contacts/" class="active">Home</a>
+  <a href="http://wakeit.nl:3000/groups/">Groepen</a>
+  <a href="http://wakeit.nl:3000/contacts.xml">Telefoonboek</a>
+  <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+</div>
+<script>
+function myFunction() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+        x.className += " responsive";
+    } else {
+        x.className = "topnav";
+    }
+}
+</script>
+	<h1>Nieuwe groep</h1>
+	  <% if @group.errors.any? %>
+	  <div id="error_explanation">
+		<h2>
+		  <%= pluralize(@group.errors.count, "error") %>
+		  verhinderd het opslaan
+		</h2>
+
+		<ul>
+		<% @group.errors.full_messages.each do |msg| %>
+		  <li><%= msg %></li>
+		<% end %>
+		</ul>
+	  </div>
+	<% end %>
+    <!-- Group form -->
+    <%= form_for @group do |f| %>  
+  <div class="form"> 
+	<!-- Groupnaam -->
+	<%= f.label :group_name, 'Groep naam' %>
+    <%= f.text_field :group_name %><br>
+  </div> 
+  <div class="actions"> 
+    <%= f.submit "Aanmaken" %>
+	<button><%= link_to 'Terug naar het overzicht', "/groups/" %></button>
+  </div> 
+<% end %>
+  </div>
+</div>

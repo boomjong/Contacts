@@ -1,0 +1,32 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<div class="bg">
+	<div class="content">
+	<div class="topnav" id="myTopnav">
+  <a href="http://wakeit.nl:3000/contacts/" class="active">Home</a>
+  <a href="http://wakeit.nl:3000/groups/">Groepen</a>
+    <a href="http://wakeit.nl:3000/contacts.xml">Telefoonboek</a>
+  <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+</div>
+<script>
+function myFunction() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+        x.className += " responsive";
+    } else {
+        x.className = "topnav";
+    }
+}
+</script>
+		<h1>Groepen</h1>
+		<% @groups.each do |group|%>
+			<p>Groepnaam <%= group.group_name%>
+			<td><%= link_to 'Weergeven', group %></td>
+			<%= link_to 'Bewerken', edit_group_path(group) %>
+			<%= link_to 'Verwijderen', group, method: :delete, data: { confirm: 'Weet u zeker dat u de geselecteerde contact wil verwijderen?' } %>
+			</p>
+		<% end%>
+		<div class="buttons"> 
+			<p><%= link_to 'Groep toevoegen', "/groups/new" %></p>
+		</div>
+	</div>
+</div>

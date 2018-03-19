@@ -1,0 +1,65 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<div class="bg">
+    <div class="content">
+        <div class="topnav" id="myTopnav">
+            <a href="http://wakeit.nl:3000/contacts/" class="active">Home</a>
+            <a href="http://wakeit.nl:3000/groups/">Groepen</a>
+			  <a href="http://wakeit.nl:3000/contacts.xml">Telefoonboek</a>
+            <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+        </div>
+        <script>
+            function myFunction() {
+                var x = document.getElementById("myTopnav");
+                if (x.className === "topnav") {
+                    x.className += " responsive";
+                } else {
+                    x.className = "topnav";
+                }
+            }
+        </script>
+        <h1>Contactpersonen</h1>
+		<div class="buttons"> 
+			<p><%= link_to 'Contact toevoegen', "/contacts/new" %></p>
+		</div>
+        <div class="notification">
+            <!-- Error messages -->
+            <% if flash[:notice] -%>
+                <p class="notice">
+                    <%= flash[:notice] %>
+                </p>
+                <% end -%>
+        </div>
+		<% @contacts.each do |contact|%>
+			<div class="contacts">
+			<h3>
+                <%= contact.first_name%>
+                <%= contact.middle_name%>
+                <%= contact.last_name%>
+			</h3>
+			<h4>Telefoonnummer</h4>
+			<p>
+                <%= contact.phone_number%>
+            </p>
+			<h4>Adresgegevens</h4>
+			<p>
+				<%= contact.street_name%>
+                <%= contact.street_number%>
+            </p>
+			<p>
+				<%= contact.zipcode%>
+                <%= contact.city%>
+            </p>
+			<p>   
+				<%= contact.country%>
+            </p>
+			<h4>Groepen</h4> 
+				<% contact.groups.each do |group|%>
+                <p><%= group.group_name %></p>
+        <% end %>
+        </br><p><%= link_to 'Bewerken', edit_contact_path(contact) %></p>
+        <p><%= link_to 'Verwijderen', contact, method: :delete, data: { confirm: 'Weet u zeker dat u de geselecteerde contact wil verwijderen?' } %><p>
+		</div>		
+        <% end%>
+		<div class="clear"></div>
+    </div>
+</div>
